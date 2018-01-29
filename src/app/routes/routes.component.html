@@ -1,0 +1,9 @@
+<a [href]="this.map"> map </a>
+
+<ul>
+    <li *ngFor="let reitti of reittiTaulukko">
+        <h4>{{reitti.name}}</h4>
+        <p>{{this.lat}}</p>
+        <p>{{reitti.route.longName}}</p>
+    </li>
+</ul>
