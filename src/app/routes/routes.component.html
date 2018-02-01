@@ -1,20 +1,31 @@
-
-
 <article *ngFor="let pysakki of reittiTaulukko">
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <h2>
+                    {{pysakki.name}} {{pysakki.code}}
+                </h2>
+            </mat-panel-title>
+        </mat-expansion-panel-header>
 
-    <h2>
-        Hae pysäkin reitit
-    </h2>
+        <div fxLayout="row">
+            <div fxFlex>
+                <mat-list>
+                    <mat-list-item *ngFor="let reitti of pysakki.patterns">
+                    <span [class]="reitti.directionId | routeDirectionToClass">
+                        <mat-icon>{{reitti.directionId | routeDirection}}</mat-icon>
+                    </span>
+                        &nbsp;
+                        {{reitti.name}}
+                    </mat-list-item>
+                </mat-list>
+            </div>
+            <div fxFlex>
+                <agm-map [latitude]="pysakki.lat" [longitude]="pysakki.lon" [zoom]="17">
+                    <agm-marker [latitude]="pysakki.lat" [longitude]="pysakki.lon"></agm-marker>
+                </agm-map>
+            </div>
+        </div>
 
-    <agm-map [latitude]="pysakki.lat" [longitude]="pysakki.lon" [zoom]="17">
-        <agm-marker [latitude]="pysakki.lat" [longitude]="pysakki.lon"></agm-marker>
-    </agm-map>
-
-    <ul>
-        <li *ngFor="let reitti of pysakki.patterns">
-            <h4>{{ reitti.name }}</h4>
-            <p><span [class]="reitti.directionId | pipe ">{{ reitti.directionId | routeDirection }}</span> {{ reitti.route.longName }}</p>
-        </li>
-    </ul>
-
+    </mat-expansion-panel>
 </article>
